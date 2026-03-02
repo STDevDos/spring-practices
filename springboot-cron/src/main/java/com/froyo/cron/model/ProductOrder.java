@@ -1,13 +1,38 @@
 package com.froyo.cron.model;
 
-import lombok.Data;
+import java.util.Objects;
 
-@Data
 public class ProductOrder {
 
-    private String orderId;
-    private String productName;
-    private String status;
-    private CustomerInfo customerInfo;
+    private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        ProductOrder that = (ProductOrder) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductOrder{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.nio.file.AccessDeniedException;
 
 @ControllerAdvice
@@ -70,3 +70,4 @@ public class ErrorHandlingControllerAdvice {
     }
 
 }
+

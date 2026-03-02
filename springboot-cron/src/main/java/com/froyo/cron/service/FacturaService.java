@@ -7,4 +7,6 @@ public interface FacturaService {
      * El valor de las carteras se obtendrá de forma manual.
      */
     void sendBalance();
+
+    void createFactura();
 }

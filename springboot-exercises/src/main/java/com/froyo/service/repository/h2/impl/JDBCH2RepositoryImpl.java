@@ -1,38 +1,55 @@
 package com.froyo.service.repository.h2.impl;
 
+import com.froyo.service.model.User;
 import com.froyo.service.repository.h2.JDBCH2Repository;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
-@AllArgsConstructor
-@Log4j2
 @Repository
 public class JDBCH2RepositoryImpl implements JDBCH2Repository {
 
-    @Qualifier("jdbcTemplateH2")
-    private final JdbcTemplate jdbcTemplate;
+    private static final Logger log = LogManager.getLogger(JDBCH2RepositoryImpl.class);
+
+    private final JdbcTemplate jdbcTemplateH2;
+
+    public JDBCH2RepositoryImpl(@Qualifier("jdbcTemplateH2") JdbcTemplate jdbcTemplateH2) {
+        this.jdbcTemplateH2 = jdbcTemplateH2;
+    }
 
     @PostConstruct
     public void createTable() {
-        jdbcTemplate.execute("create table customerdata(id SERIAL,name VARCHAR(255),age VARCHAR(255) )");
+        jdbcTemplateH2.execute("CREATE TABLE users (id SERIAL, name VARCHAR(255))");
     }
 
     @Override
-    public String saveCustomerData() {
+    public void save(User user) {
+        StringBuilder sbQuery = new StringBuilder();
+        sbQuery.append("INSERT INTO users (name) VALUES (?) ");
+
+        List<Object> params = new ArrayList<>();
+        params.add(user.getName());
 
         try {
-            jdbcTemplate.execute("insert into customerdata(id,name,age) values (1,'Froy','34') ");
-            return "SUCCESS insert into customerdata";
-        } catch (Exception e) {
-            log.error("@@@ insertJDBCH2: ", e);
-            return "ERROR insert into customerdata";
+            jdbcTemplateH2.update(sbQuery.toString(), params);
+        } catch (Exception ex) {
+            log.error("@@@ save: ", ex);
         }
-
     }
 
+    @Override
+    public List<User> findAll() {
+        return jdbcTemplateH2.query("SELECT * FROM users", (rs, rowNum) -> {
+            User user = new User();
+            user.setName(rs.getString("name"));
+            return user;
+        });
+    }
 }
+

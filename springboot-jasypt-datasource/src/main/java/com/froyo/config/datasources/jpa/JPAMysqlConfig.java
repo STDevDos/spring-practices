@@ -2,7 +2,6 @@ package com.froyo.config.datasources.jpa;
 
 import com.froyo.service.model.entity.DomainPackagesJPA;
 import com.froyo.service.repository.mysql.RepositoryPackageMysql;
-import lombok.AllArgsConstructor;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,18 +15,18 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@AllArgsConstructor
 @Configuration
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "mysqlEntityManagerFactory",
-        transactionManagerRef = "mysqlTransactionManager",
-        basePackageClasses = RepositoryPackageMysql.class
-)
+@EnableJpaRepositories(entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager", basePackageClasses = RepositoryPackageMysql.class)
 @EnableJpaAuditing
 public class JPAMysqlConfig {
 
     private final Environment env;
     private final DataSource datasourceMysql;
+
+    public JPAMysqlConfig(Environment env, DataSource datasourceMysql) {
+        this.env = env;
+        this.datasourceMysql = datasourceMysql;
+    }
 
     @Bean(name = "mysqlEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory() {
@@ -35,13 +34,13 @@ public class JPAMysqlConfig {
         final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(datasourceMysql);
         entityManagerFactoryBean.setPackagesToScan(DomainPackagesJPA.class.getPackageName());
-        //entityManagerFactoryBean.setJpaVendorAdapter(this.vendorAdaptor());
+        // entityManagerFactoryBean.setJpaVendorAdapter(this.vendorAdaptor());
 
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setPersistenceUnitName("mysql");
 
         entityManagerFactoryBean.setJpaProperties(this.jpaHibernateProperties());
-        //entityManagerFactoryBean.afterPropertiesSet();
+        // entityManagerFactoryBean.afterPropertiesSet();
 
         return entityManagerFactoryBean;
     }
@@ -61,15 +60,17 @@ public class JPAMysqlConfig {
         return properties;
     }
 
-    //private JpaVendorAdapter vendorAdaptor() {
-    //final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    // private JpaVendorAdapter vendorAdaptor() {
+    // final HibernateJpaVendorAdapter vendorAdapter = new
+    // HibernateJpaVendorAdapter();
     // put all the adapter properties here, such as show sql
 
-    //vendorAdapter.setShowSql(env.getProperty("postgresql.jpa.show-sql", Boolean.class)); 	//Solo para que nos muestre las sentencias.
-    //vendorAdapter.setDatabasePlatform(env.getProperty("postgresql.jpa.properties.hibernate.dialect",String.class));
-    //vendorAdapter.setGenerateDdl(true);
+    // vendorAdapter.setShowSql(env.getProperty("postgresql.jpa.show-sql",
+    // Boolean.class)); //Solo para que nos muestre las sentencias.
+    // vendorAdapter.setDatabasePlatform(env.getProperty("postgresql.jpa.properties.hibernate.dialect",String.class));
+    // vendorAdapter.setGenerateDdl(true);
 
-    //return vendorAdapter;
-    //}
+    // return vendorAdapter;
+    // }
 
 }

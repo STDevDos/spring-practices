@@ -1,15 +1,17 @@
 package com.froyo.filters;
 
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Log4j2
 @WebFilter(urlPatterns = "/app/*")
 public class XYZFilter implements Filter {
+
+    private static final Logger log = LogManager.getLogger(XYZFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -28,3 +30,4 @@ public class XYZFilter implements Filter {
     }
 
 }
+

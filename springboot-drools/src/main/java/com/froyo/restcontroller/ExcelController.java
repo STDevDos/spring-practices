@@ -1,22 +1,23 @@
 package com.froyo.restcontroller;
 
 import com.froyo.dto.Order;
-import lombok.AllArgsConstructor;
-import org.kie.api.runtime.KieSession;
+import com.froyo.service.ExcelService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
 @RestController
 public class ExcelController {
 
-    private final KieSession session;
+    private final ExcelService excelService;
+
+    public ExcelController(ExcelService excelService) {
+        this.excelService = excelService;
+    }
 
     @PostMapping("/order")
-    public Order orderNow(@RequestBody Order order) {
-        session.insert(order);
-        session.fireAllRules();
+    public Order order(@RequestBody Order order) {
+        excelService.getDiscount(order);
         return order;
     }
 

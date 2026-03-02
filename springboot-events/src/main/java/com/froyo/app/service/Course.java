@@ -1,14 +1,14 @@
 package com.froyo.app.service;
 
-import lombok.Getter;
-
-@Getter
 public class Course {
 
-    private String title;
+    private final String name;
 
-    public Course(String title) {
-        this.title = title;
+    public Course(String name) {
+        this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
 }

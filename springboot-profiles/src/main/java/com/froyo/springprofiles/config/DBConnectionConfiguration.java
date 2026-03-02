@@ -1,15 +1,17 @@
 package com.froyo.springprofiles.config;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Slf4j
 @Configuration
 @EnableConfigurationProperties(DBConfiguration.class)
 public class DBConnectionConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(DBConnectionConfiguration.class);
 
     private final DBConfiguration dbConfiguration;
 

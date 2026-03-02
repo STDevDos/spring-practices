@@ -2,8 +2,8 @@ package com.platzi.platziweb.common.converter;
 
 import com.platzi.platziweb.common.codevalue.Category;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
@@ -30,3 +30,4 @@ public class CategoryConverter implements AttributeConverter<Category, String> {
     }
 
 }
+

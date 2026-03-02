@@ -2,7 +2,7 @@ package com.froyo.service.model.entity.postgres;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @SuppressWarnings("unused")
 @Entity
@@ -21,3 +21,4 @@ public class PhoneEntity {
     private long phoneNumber;
 
 }
+

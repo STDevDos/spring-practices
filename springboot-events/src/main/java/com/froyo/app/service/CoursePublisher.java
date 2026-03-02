@@ -1,27 +1,24 @@
 package com.froyo.app.service;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-
-@Slf4j
-@Component
-@AllArgsConstructor
+@Service
 public class CoursePublisher {
 
-    private final ApplicationEventPublisher publisher;
+    private static final Logger log = LoggerFactory.getLogger(CoursePublisher.class);
 
-    @Async
-    public void publish(String id) throws InterruptedException {
-        log.info("PUBLISHER: Producing course");
-        Thread.sleep(10_000); // 10 segundos
-        Course course = new Course(id + " - " + randomNumeric(5));
-        publisher.publishEvent(course);
+    private final ApplicationEventPublisher applicationEventPublisher;
+
+    public CoursePublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
+    public void publish(String name) {
+        log.info("Publish: " + name);
+        applicationEventPublisher.publishEvent(new Course(name));
+    }
 
 }

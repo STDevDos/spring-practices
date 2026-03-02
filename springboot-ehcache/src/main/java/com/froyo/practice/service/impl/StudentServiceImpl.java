@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 public class StudentServiceImpl implements StudentService {
 
     @Override
-    public Student retrieveStudent(Long studentId) {
-        if (1L == studentId) {
+    public Student getStudentById(int studentId) {
+        if (1 == studentId) {
             return new Student(1, "Froyo", "Muguruza");
         } else {
             return new Student(2, "Dann", "Muguruza");

@@ -1,17 +1,42 @@
 package com.froyo.service.model.util.files;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
-@Data
 public class MultipartFileData implements Serializable {
-
-    private static final long serialVersionUID = 3989818823419352316L;
-
     private byte[] bytes;
     private String contentType;
     private String originalFilename;
-    private Long size;
+    private long size;
 
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getOriginalFilename() {
+        return originalFilename;
+    }
+
+    public void setOriginalFilename(String originalFilename) {
+        this.originalFilename = originalFilename;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
 }

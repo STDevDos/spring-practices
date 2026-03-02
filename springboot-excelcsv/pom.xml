@@ -32,6 +32,11 @@
             <version>1.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.froyo</groupId>
+            <artifactId>java-mvn-messagesresponse</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

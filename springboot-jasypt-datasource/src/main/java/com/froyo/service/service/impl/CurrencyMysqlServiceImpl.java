@@ -7,18 +7,20 @@ import com.froyo.service.model.dto.CurrencyResponse;
 import com.froyo.service.model.entity.CurrencyEntity;
 import com.froyo.service.repository.mysql.CurrencyMysqlRepository;
 import com.froyo.service.service.CurrencyService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@AllArgsConstructor
 @Service("currencyMysqlServiceImpl")
 public class CurrencyMysqlServiceImpl implements CurrencyService {
 
     private final CurrencyMysqlRepository currencyMysqlRepository;
+
+    public CurrencyMysqlServiceImpl(CurrencyMysqlRepository currencyMysqlRepository) {
+        this.currencyMysqlRepository = currencyMysqlRepository;
+    }
 
     @Override
     public CurrencyResponse saveCurrency(final CurrencyRequest currencyRequest) {

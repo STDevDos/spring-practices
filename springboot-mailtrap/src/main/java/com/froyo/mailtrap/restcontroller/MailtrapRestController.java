@@ -3,17 +3,19 @@ package com.froyo.mailtrap.restcontroller;
 import com.froyo.mailtrap.dto.FeedbackDTO;
 import com.froyo.mailtrap.dto.inout.SendFeedbackResponse;
 import com.froyo.mailtrap.service.MailtrapService;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class MailtrapRestController {
 
     private final MailtrapService mailtrapService;
+
+    public MailtrapRestController(MailtrapService mailtrapService) {
+        this.mailtrapService = mailtrapService;
+    }
 
     @PostMapping("/sendFeedback")
     public SendFeedbackResponse sendFeedback(@RequestBody @Valid FeedbackDTO feedbackDTO) {
@@ -30,5 +32,5 @@ public class MailtrapRestController {
         return "success seis";
     }
 
-
 }
+

@@ -4,6 +4,6 @@ import com.froyo.practice.model.Student;
 
 public interface StudentService {
 
-    Student retrieveStudent(Long studentId);
+    Student getStudentById(int studentId);
 
 }

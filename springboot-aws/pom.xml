@@ -12,7 +12,7 @@
     <artifactId>springboot-aws</artifactId>
 
     <properties>
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -23,12 +23,12 @@
         </dependency>
 
         <!--
-        https://spring.io/blog/2021/03/17/spring-cloud-aws-2-3-is-now-available
+        https://github.com/awspring/spring-cloud-aws
         -->
 
         <dependency>
             <groupId>io.awspring.cloud</groupId>
-            <artifactId>spring-cloud-starter-aws-messaging</artifactId>
+            <artifactId>spring-cloud-aws-starter-sqs</artifactId>
         </dependency>
 
     </dependencies>

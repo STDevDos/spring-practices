@@ -1,19 +1,36 @@
 package com.froyo.service.model.dto.files;
 
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Objects;
 
-import java.io.Serializable;
-import java.time.LocalDate;
+public class UploadAlbumRequest {
 
-@Data
-public class UploadAlbumRequest implements Serializable {
+    private String name;
 
-    private static final long serialVersionUID = -322061710855948063L;
+    public String getName() {
+        return name;
+    }
 
-    private String titleAlbum;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateAlbum;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UploadAlbumRequest that = (UploadAlbumRequest) o;
+        return Objects.equals(name, that.name);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "UploadAlbumRequest{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

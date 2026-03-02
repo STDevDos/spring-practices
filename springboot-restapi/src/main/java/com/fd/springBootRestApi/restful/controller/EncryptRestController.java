@@ -1,6 +1,5 @@
 package com.fd.springBootRestApi.restful.controller;
 
-import lombok.AllArgsConstructor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.password.BasicPasswordEncryptor;
@@ -14,15 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Froy
  */
-@AllArgsConstructor
 @RestController
 public class EncryptRestController {
 
     private final Environment environment;
 
+    public EncryptRestController(Environment environment) {
+        this.environment = environment;
+    }
+
     @GetMapping("test")
     public String test() {
-        return environment.getProperty("encryptedv3.property"); //"Password@3"
+        return environment.getProperty("encryptedv3.property"); // "Password@3"
     }
 
     @GetMapping("testBasicTextEncryptor")
@@ -36,9 +38,9 @@ public class EncryptRestController {
         String myEncryptedText = textEncryptor.encrypt(privateData);
         String plainText = textEncryptor.decrypt(myEncryptedText);
 
-        //assertNotSame(privateData, myEncryptedText);
+        // assertNotSame(privateData, myEncryptedText);
 
-        //------------------------------------------------
+        // ------------------------------------------------
 
         String password = "secret-pass";
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
@@ -46,10 +48,9 @@ public class EncryptRestController {
 
         boolean result = passwordEncryptor.checkPassword("secret-spass", encryptedPassword);
 
-        //assertTrue(result);
+        // assertTrue(result);
 
-
-        ///-------------------------
+        /// -------------------------
 
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         String privateData2 = "secret-dataFroy";
@@ -57,12 +58,12 @@ public class EncryptRestController {
         encryptor.setAlgorithm("PBEWithMD5AndTripleDES");
 
         String encryptedText2 = encryptor.encrypt(privateData2);
-        //assertNotSame(privateData, encryptedText);
+        // assertNotSame(privateData, encryptedText);
 
         String plainText2 = encryptor.decrypt(encryptedText2);
-        //assertEquals(plainText, privateData);
+        // assertEquals(plainText, privateData);
 
-        //------------------------------pool
+        // ------------------------------pool
         String privateData3 = "secret-dataFroyDaniel";
         PooledPBEStringEncryptor encryptor3 = new PooledPBEStringEncryptor();
         encryptor3.setPoolSize(4);

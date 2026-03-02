@@ -1,18 +1,26 @@
 package com.froyo.initial.restcontroller;
 
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.froyo.initial.service.UploadFileService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class InitialRestController {
 
-    @GetMapping("/initial")
-    public String initial() {
-        return "com/froyo/initial";
+    private final UploadFileService uploadFileService;
+
+    public InitialRestController(UploadFileService uploadFileService) {
+        this.uploadFileService = uploadFileService;
+    }
+
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
+        uploadFileService.uploadFile(file);
+        return "success";
     }
 
 }

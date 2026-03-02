@@ -1,23 +1,28 @@
 package com.froyo.service.controller.database;
 
+import com.froyo.service.model.User;
 import com.froyo.service.services.JDBCH2Service;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
-@Controller
-@RequestMapping("jdbcH2")
+import java.util.List;
+
+@RestController
 public class JDBCH2WebController {
 
-    private final JDBCH2Service jdbch2Service;
+    private final JDBCH2Service jdbcH2Service;
 
-    @ResponseBody
-    @PostMapping("saveCustomerData")
-    public String saveCustomerData() {
-        return jdbch2Service.saveCustomerData();
+    public JDBCH2WebController(JDBCH2Service jdbcH2Service) {
+        this.jdbcH2Service = jdbcH2Service;
     }
 
+    @PostMapping("/saveUserH2")
+    public String saveUserH2(@RequestBody User user) {
+        jdbcH2Service.save(user);
+        return "success";
+    }
+
+    @GetMapping("/findAllH2")
+    public List<User> findAllH2() {
+        return jdbcH2Service.findAll();
+    }
 }

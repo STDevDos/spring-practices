@@ -18,3 +18,4 @@ public interface AnimalsRepository {
     List<AnimalsEntity> findAll();
 
 }
+

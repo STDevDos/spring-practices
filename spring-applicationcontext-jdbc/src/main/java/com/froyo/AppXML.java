@@ -1,21 +1,25 @@
 package com.froyo;
 
-import com.froyo.model.dto.PlanetDTO;
-import lombok.extern.java.Log;
-import org.springframework.context.ConfigurableApplicationContext;
+import com.froyo.service.AnimalsService;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@Log
+import java.util.logging.Logger;
+
 public class AppXML {
+
+    private static final Logger log = Logger.getLogger(AppXML.class.getName());
 
     public static void main(String[] args) {
 
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("com/froyo/xml/beans.xml");
+        log.info("Iniciando AppXML");
 
-        PlanetDTO m = (PlanetDTO) appContext.getBean("mercury"); /* name of the bean */
-        log.info(m.getPlanetTypeEnum().toString());
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        AnimalsService animalsService = (AnimalsService) context.getBean("animalsServiceImpl");
 
-        appContext.close();
+        animalsService.findAll().forEach(animal -> System.out.println(animal.getName()));
+
     }
 
 }
+

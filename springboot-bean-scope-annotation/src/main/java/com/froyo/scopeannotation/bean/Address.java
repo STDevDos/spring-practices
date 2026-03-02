@@ -1,20 +1,46 @@
 package com.froyo.scopeannotation.bean;
 
-import lombok.Data;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.util.Objects;
 
-@Log4j2
-@Data
-@RequestScope
-@Component
 public class Address {
 
-    private String address = "US";
+    private static final Logger log = LogManager.getLogger(Address.class);
+
+    private String address;
 
     public Address() {
-        log.debug(String.format("Create new Address: %s", this.address));
+        log.info("Create Address Bean");
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Address address1 = (Address) o;
+        return Objects.equals(address, address1.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(address);
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "address='" + address + '\'' +
+                '}';
+    }
 }

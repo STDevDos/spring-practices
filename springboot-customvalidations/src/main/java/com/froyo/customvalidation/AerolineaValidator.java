@@ -3,8 +3,8 @@ package com.froyo.customvalidation;
 import com.froyo.customvalidation.constraints.AerolineaConstraint;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,3 +17,4 @@ public class AerolineaValidator implements ConstraintValidator<AerolineaConstrai
         return aerolineas.contains(StringUtils.upperCase(value));
     }
 }
+

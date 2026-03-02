@@ -4,35 +4,39 @@ import com.froyo.model.EmployeeAddresses;
 import com.froyo.model.EmployeeNames;
 import com.froyo.model.EmployeePhone;
 import com.froyo.service.AsyncService;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@AllArgsConstructor
-@Slf4j
 @RestController
 public class AsyncController {
 
+    private static final Logger log = LoggerFactory.getLogger(AsyncController.class);
+
     private final AsyncService service;
 
-    @RequestMapping(value = "/testAsynch", method = RequestMethod.GET)
-    public void testAsynch() throws InterruptedException, ExecutionException {
-        log.info("testAsynch Start");
+    public AsyncController(AsyncService service) {
+        this.service = service;
+    }
 
-        CompletableFuture<EmployeeAddresses> employeeAddress = service.getEmployeeAddress();
+    @GetMapping("/testAsync")
+    public void testAsync() throws InterruptedException, ExecutionException {
+        log.info("testAsync Start");
+
         CompletableFuture<EmployeeNames> employeeName = service.getEmployeeName();
+        CompletableFuture<EmployeeAddresses> employeeAddress = service.getEmployeeAddress();
         CompletableFuture<EmployeePhone> employeePhone = service.getEmployeePhone();
 
         // Wait until they are all done
-        CompletableFuture.allOf(employeeAddress, employeeName, employeePhone).join();
+        CompletableFuture.allOf(employeeName, employeeAddress, employeePhone).join();
 
-        log.info("EmployeeAddress--> " + employeeAddress.get());
         log.info("EmployeeName--> " + employeeName.get());
+        log.info("EmployeeAddress--> " + employeeAddress.get());
         log.info("EmployeePhone--> " + employeePhone.get());
     }
+
 }

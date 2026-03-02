@@ -2,8 +2,8 @@ package com.froyo.customvalidation.constraints;
 
 import com.froyo.customvalidation.AerolineaValidator;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -24,3 +24,4 @@ public @interface AerolineaConstraint {
     Class<? extends Payload>[] payload() default {};
 
 }
+

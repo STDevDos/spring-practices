@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GeospatialRestController {
 
     @GetMapping("testPointSpringFramework")
-    public Point testPointSpringFramework(){
+    public Point testPointSpringFramework() {
 
-
-        Point point = new Point(null);
+        Point point = new Point(0.0, 0.0);
         return point;
     }
 

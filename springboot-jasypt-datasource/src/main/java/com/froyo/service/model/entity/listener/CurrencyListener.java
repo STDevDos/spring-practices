@@ -1,13 +1,15 @@
 package com.froyo.service.model.entity.listener;
 
 import com.froyo.service.model.entity.CurrencyEntity;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreRemove;
 
-@Log4j2
 public class CurrencyListener {
+
+    private static final Logger log = LogManager.getLogger(CurrencyListener.class);
 
     @PrePersist
     public void salvar(CurrencyEntity currency) {
@@ -20,3 +22,4 @@ public class CurrencyListener {
     }
 
 }
+

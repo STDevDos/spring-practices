@@ -1,7 +1,7 @@
 package com.froyo.springBootRestApi.service;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,17 +10,22 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.Message;
+import jakarta.mail.internet.InternetAddress;
 import java.io.File;
 
-@AllArgsConstructor
-@Log4j2
 @Service("emailService")
 public class EmailService {
 
+    private static final Logger log = LogManager.getLogger(EmailService.class);
+
     private final JavaMailSender mailSender;
     private final SimpleMailMessage preConfiguredMessage;
+
+    public EmailService(JavaMailSender mailSender, SimpleMailMessage preConfiguredMessage) {
+        this.mailSender = mailSender;
+        this.preConfiguredMessage = preConfiguredMessage;
+    }
 
     public void sendMail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -76,3 +81,4 @@ public class EmailService {
         }
     }
 }
+

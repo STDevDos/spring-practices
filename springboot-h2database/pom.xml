@@ -21,7 +21,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.2.220</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -29,6 +28,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.froyo</groupId>
+            <artifactId>java-mvn-messagesresponse</artifactId>
         </dependency>
 
     </dependencies>

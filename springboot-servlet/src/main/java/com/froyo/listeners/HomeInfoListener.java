@@ -1,15 +1,17 @@
 package com.froyo.listeners;
 
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
 
-@Log4j2
 @WebListener
 public class HomeInfoListener implements ServletContextListener {
+
+    private static final Logger log = LogManager.getLogger(HomeInfoListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -29,3 +31,4 @@ public class HomeInfoListener implements ServletContextListener {
         log.info("ServletContextEvent destroyed.");
     }
 }
+

@@ -1,26 +1,36 @@
 package com.froyo.service.model;
 
-import lombok.Data;
+import java.util.Objects;
 
-import javax.validation.constraints.*;
-
-@Data
 public class User {
 
-    @NotNull(message = "Name cannot be null")
     private String name;
 
-    @AssertTrue
-    private boolean working;
+    public String getName() {
+        return name;
+    }
 
-    @Size(min = 10, max = 200, message = "About Me must be between 10 and 200 characters")
-    private String aboutMe;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    @Min(value = 18, message = "Age should not be less than 18")
-    @Max(value = 150, message = "Age should not be greater than 150")
-    private int age;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name);
+    }
 
-    @Email(message = "Email should be valid")
-    private String email;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

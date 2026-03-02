@@ -15,7 +15,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.9.RELEASE</version>
+        <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -25,61 +25,48 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>spring-applicationcontext-jdbc</module>
-        <module>springboot-aop</module>
-        <module>springboot-bean-scope-annotation</module>
-        <module>springboot-cron</module>
-        <module>springboot-ehcache</module>
-<!--        <module>springboot-exercises</module>-->
-        <module>springboot-h2database</module>
-        <module>springboot-jasypt-datasource</module>
-        <module>springboot-loginrememberme</module>
-        <module>springboot-profiles</module>
-        <module>springboot-restapi</module>
-        <module>springboot-restclient</module>
-        <module>springboot-sendemail</module>
-        <module>springboot-servlet</module>
-        <module>springboot-customvalidations</module>
-        <module>springboot-logback</module>
-        <module>springboot-async-service</module>
-        <module>springboot-async-employeeservice</module>
-        <module>springboot-drools</module>
-        <module>springboot-swagger2</module>
-        <module>springboot-flowable</module>
-        <module>springboot-mailtrap</module>
-        <module>springboot-excelcsv</module>
+        <module>java-mvn-messagesresponse</module>
         <module>springboot-basic</module>
+        <module>spring-applicationcontext-jdbc</module>
+        <module>springboot-servlet</module>
+        <module>springboot-restclient</module>
+        <module>springboot-restapi</module>
+        <module>springboot-platzi</module>
+        <module>springboot-profiles</module>
+        <module>springboot-mailtrap</module>
+        <module>springboot-loginrememberme</module>
+        <module>springboot-jasypt-datasource</module>
         <module>springboot-jpa-basic-junit5</module>
         <module>springboot-jpa-basic-springtest</module>
+        <module>springboot-h2database</module>
+        <module>springboot-exercises</module>
+        <module>springboot-excelcsv</module>
+        <module>springboot-ehcache</module>
+        <module>springboot-drools</module>
+        <module>springboot-customvalidations</module>
+        <module>springboot-cron</module>
+        <module>springboot-bean-scope-annotation</module>
+        <module>springboot-async-service</module>
+        <module>springboot-async-employeeservice</module>
+        <module>springboot-aop</module>
+        <module>springboot-swagger2</module>
+        <module>springboot-sendemail</module>
         <module>springboot-events</module>
-        <module>springboot-platzi</module>
         <module>springboot-aws</module>
+        <module>spring-mlt</module>
     </modules>
 
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- Use the latest Java LTS release -->
-        <java.version>21</java.version>
+        <java.version>25</java.version>
 
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven.compiler.release>24</maven.compiler.release>
 
-        <junit-plataform.version>5.7.0-M1</junit-plataform.version>
-        <junit-platform-commons.version>1.7.0-M1</junit-platform-commons.version>
-        <mockito-junit-jupiter.version>3.3.3</mockito-junit-jupiter.version>
-
-        <lombok.version>1.18.12</lombok.version>
-        <apache.commons-lang3.version>3.18.0</apache.commons-lang3.version>
-        <hamcrest.version>2.2</hamcrest.version>
-
-        <swagger.version>2.9.2</swagger.version>
-        <hikaricp.version>3.4.2</hikaricp.version>
-        <mysql-connector-java.version>8.0.20</mysql-connector-java.version>
-        <hibernate-validator.version>7.0.0.Alpha3</hibernate-validator.version>
-        <postgresql.version>42.2.12.jre7</postgresql.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
+        <apache.commons-lang3.version>3.17.0</apache.commons-lang3.version>
+        <springdoc.version>2.8.5</springdoc.version>
 
     </properties>
 
@@ -95,36 +82,29 @@
             <!--            como todavía no lo se aplicar bien jaja, entoces esta es otra forma-->
             <!--            locktable maven-->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit-plataform.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>io.awspring.cloud</groupId>
                 <artifactId>spring-cloud-aws-dependencies</artifactId>
-                <version>2.3.0</version>
+                <version>3.2.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
+            <!-- Froyo GitHub Packages -->
+            <dependency>
+                <groupId>com.froyo</groupId>
+                <artifactId>java-mvn-messagesresponse</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
 
         <!-- Utility dependencies -->
+
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${validation-api.version}</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
         <!-- Apache Utils -->
@@ -134,45 +114,16 @@
             <version>${apache.commons-lang3.version}</version>
         </dependency>
 
-        <!-- JUnit5 -->
+        <!-- Spring Boot Test (brings JUnit 5, Mockito, Hamcrest) -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-plataform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit-plataform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-commons</artifactId>
-            <version>${junit-platform-commons.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito-junit-jupiter.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Third-party assertion libraries -->
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Froyo GitHub Packages -->
-        <dependency>
-            <groupId>com.froyo</groupId>
-            <artifactId>java-mvn-messagesresponse</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
 
     </dependencies>
@@ -206,7 +157,10 @@
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M4</version>
+                    <version>3.5.2</version>
+                    <configuration>
+                        <argLine>-Dnet.bytebuddy.experimental=true -XX:+EnableDynamicAgentLoading -Dspring.classformat.ignore=true</argLine>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>

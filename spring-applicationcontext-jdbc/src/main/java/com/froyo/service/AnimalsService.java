@@ -18,3 +18,4 @@ public interface AnimalsService {
     List<AnimalsEntity> findAll();
 
 }
+
