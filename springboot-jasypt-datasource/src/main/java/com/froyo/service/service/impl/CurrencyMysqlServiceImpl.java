@@ -27,8 +27,8 @@ public class CurrencyMysqlServiceImpl implements CurrencyService {
 
         CurrencyResponse currencyResponse = new CurrencyResponse();
 
-        CurrencyEntity currencyEntity = new CurrencyEntity();
-        currencyEntity.setCurrency(currencyRequest.getCurrency());
+        var currencyEntity = new CurrencyEntity();
+        currencyEntity.setCurrency(currencyRequest.currency());
         currencyEntity.setFechacompleta(LocalDateTime.now());
         currencyEntity.setFecha(LocalDate.now());
         currencyEntity.setTiempo(LocalTime.now());

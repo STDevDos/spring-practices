@@ -26,18 +26,18 @@ public class MailtrapServiceImpl implements MailtrapService {
         SendFeedbackResponse sendFeedbackResponse = new SendFeedbackResponse();
 
         // Create a mail sender
-        JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
+        var javaMailSenderImpl = new JavaMailSenderImpl();
         javaMailSenderImpl.setHost(emailConfig.getHost());
         javaMailSenderImpl.setPort(emailConfig.getPort());
         javaMailSenderImpl.setUsername(emailConfig.getUserName());
         javaMailSenderImpl.setPassword(emailConfig.getPassword());
 
         // Create an email instance
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(feedbackDTO.getEmail());
+        var simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(feedbackDTO.email());
         simpleMailMessage.setTo("57a591e416-d85bfd@inbox.mailtrap.io");
-        simpleMailMessage.setSubject(String.format("New feedback from %s ", feedbackDTO.getName()));
-        simpleMailMessage.setText(feedbackDTO.getFeedback());
+        simpleMailMessage.setSubject(String.format("New feedback from %s ", feedbackDTO.name()));
+        simpleMailMessage.setText(feedbackDTO.feedback());
 
         // Send mail
         javaMailSenderImpl.send(simpleMailMessage);

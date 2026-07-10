@@ -12,6 +12,6 @@ public class ViajeValidatorImpl implements ConstraintValidator<ViajeValidator, V
         if (value == null) {
             return true;
         }
-        return !StringUtils.equalsIgnoreCase(value.getOrigin(), value.getDestination());
+        return !StringUtils.equalsIgnoreCase(value.origin(), value.destination());
     }
 }

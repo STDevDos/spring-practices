@@ -41,15 +41,15 @@ public class CurrencyMysqlServiceImpl implements CurrencyService {
 
         CurrencyEntityDTOResponse dtoResponse = new CurrencyEntityDTOResponse();
 
-        CurrencyEntity currencyEntity2 = new CurrencyEntity();
+        var currencyEntity2 = new CurrencyEntity();
         currencyEntity2.setCurrency(LocalDateTime.now().toString());
         // currencyMysqlRepository.save(currencyEntity2);
 
-        CurrencyEntity currencyEntity = new CurrencyEntity();
-        currencyEntity.setCurrency(dtoRequest.getCurrency());
+        var currencyEntity = new CurrencyEntity();
+        currencyEntity.setCurrency(dtoRequest.currency());
         // currencyMysqlRepository.save(currencyEntity);
 
-        List<CurrencyEntity> currencyEntities = new ArrayList<>();
+        var currencyEntities = new ArrayList<CurrencyEntity>();
         currencyEntities.add(currencyEntity2);
         currencyEntities.add(currencyEntity);
         currencyJDBCRepository.batchInsert(currencyEntities);

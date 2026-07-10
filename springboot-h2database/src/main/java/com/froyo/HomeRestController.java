@@ -23,7 +23,7 @@ public class HomeRestController {
         result.setPersonaRequest(personaRequest);
 
         Persona persona = new Persona();
-        persona.setName(personaRequest.getFirstName());
+        persona.setName(personaRequest.firstName());
 
         personaService.save(persona);
 
