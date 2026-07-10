@@ -2,19 +2,20 @@
 
 Este repositorio contiene un ecosistema de micro-proyectos y prácticas desarrolladas con **Spring Boot**, ahora completamente modernizado para las últimas tecnologías de la plataforma Java.
 
-## 🚀 Actualización Reciente (Marzo 2026)
+## 🚀 Actualización Integral (Julio 2026)
 
-Se ha realizado una actualización integral para llevar todo el codebase a los estándares más modernos:
+Se ha realizado una actualización de gran alcance para llevar todo el codebase a los estándares más modernos de la industria:
 
-- **Java 25 (LTS)**: Todo el proyecto ha sido actualizado para aprovechar las funcionalidades y el rendimiento de la versión 25 de Java.
-- **Spring Boot 3.4.3**: Actualización a la última versión estable de Spring Boot 3, asegurando compatibilidad con Jakarta EE y eliminando dependencias obsoletas.
-- **Spring Framework 6.2.3**: Núcleo actualizado para el máximo rendimiento y soporte de nuevas APIs.
-- **Spring Cloud 4.2.0**: Modernización de los sistemas de mensajería (StreamBridge) y resiliencia.
+- **Java 25 (LTS)**: Todo el proyecto compilado y ejecutado bajo la especificación Java 25 nativa (`maven.compiler.release=25`).
+- **Spring Boot 3.5.3**: Actualización a la última versión estable real de Spring Boot 3, asegurando compatibilidad con Jakarta EE 10+ y eliminando dependencias obsoletas.
+- **Hilos Virtuales de Java (Virtual Threads - JEP 444)**: Habilitados globalmente (`spring.threads.virtual.enabled=true`) en todos los submódulos configurados, logrando concurrencia ultra-ligera y óptima para operaciones asíncronas.
+- **Java Records (Java 16+)**: Refactorización masiva de DTOs, Requests y Payloads a estructuras inmutables de tipo `record`, eliminando más de 500 líneas de código repetitivo (*boilerplate*) de getters, setters, constructores y métodos `equals`/`hashCode`/`toString`.
+- **Maven Wrapper (`mvnw`)**: Añadido para estandarizar la compilación y dependencias del ecosistema sin necesidad de instalación previa del framework Maven.
 
 ## 🛠️ Requisitos del Sistema
 
-- **JDK 25**: Es necesario tener instalado el JDK 25 para compilar y ejecutar este proyecto.
-- **Maven 3.9+**: Para la gestión de dependencias y construcción del proyecto.
+- **JDK 25** (o superior): Necesario para compilar y ejecutar este proyecto.
+- **Maven Wrapper**: Incluido en el directorio raíz como `./mvnw`.
 
 ## 📁 Módulos Principales y Logros
 
@@ -22,34 +23,33 @@ Este ecosistema cubre una amplia gama de escenarios, desde básicos hasta avanza
 
 | Módulo | Descripción | Cambios en Modernización |
 | :--- | :--- | :--- |
-| `spring-mlt` | Microservicio complejo con Seguridad, Mensajería y Cache | Migración a Spring Security 6, Spring Cloud Stream 4 y Resilience4J 2. |
-| `springboot-jpa-basic-junit5` | Pruebas unitarias de persistencia | Configurado para compatibilidad Mockito con Java 25. |
-| `springboot-h2database` | Servicios REST con base de datos en memoria | Optimizado para inyección de dependencias moderna. |
-| `springboot-exercises` | Ejercicios de controladores y lógica espacial | Corrección de aserciones y compatibilidad con Spring Data. |
-| `springboot-cron` | Servicios programados y mensajería | Refactorización de servicios de mail y procesos batch. |
+| `spring-mlt` | Microservicio complejo con Seguridad, Mensajería y Cache | Migración a Spring Security 6, Spring Cloud Stream 4 y Resilience4J 2. Hilos Virtuales activos. |
+| `springboot-jpa-basic-junit5` | Pruebas unitarias de persistencia | Configurado para compatibilidad Mockito con Java 25. DTOs migrados a Records. |
+| `springboot-h2database` | Servicios REST con base de datos en memoria | Inyección de dependencias moderna, DTOs y Requests migrados a Records. |
+| `springboot-platzi` | Práctica sobre JPA y persistencia avanzada | Reemplazo de `@GenericGenerator` de Hibernate (obsoleto) a favor de la estrategia estándar de JPA `GenerationType.UUID`. |
+| `spring-applicationcontext-jdbc` | Configuración clásica de Contexto de Spring | Refactorización de Bean lookups manuales a métodos genéricos auto-tipados `context.getBean(name, Class)`. DTOs migrados a Records. |
 
 ## ⚙️ Notas Técnicas de la Modernización
 
 Durante este proceso se resolvieron retos clave de compatibilidad:
 
-1.  **Compatibilidad de Bytecode**: Debido a que Java 25 es extremadamente nuevo, se configuró el plugin de compilación para generar bytecode compatible con Java 24 (`maven.compiler.release=24`), permitiendo que las herramientas de análisis de Spring operen correctamente.
-2.  **Spring Security 6**: Se eliminó el uso de `WebSecurityConfigurerAdapter` (removido en SB3) a favor de la configuración basada en componentes `SecurityFilterChain`.
-3.  **Mockito y ByteBuddy**: Se añadieron parámetros específicos en `maven-surefire-plugin` (`-Dnet.bytebuddy.experimental=true`) para permitir que Mockito pueda instrumentar clases en el entorno de Java 25.
-4.  **Spring Cloud Stream**: Se migró el modelo de `@EnableBinding` al modelo funcional usando `StreamBridge`, permitiendo mayor flexibilidad y eliminando el acoplamiento con interfaces internas de Spring Cloud.
+1. **JPA UUID Generation**: Eliminación de dependencias propietarias de Hibernate para la generación de claves primarias UUID, usando la propiedad nativa de Jakarta Persistence.
+2. **Mockito y ByteBuddy**: Parámetros específicos en `maven-surefire-plugin` (`-Dnet.bytebuddy.experimental=true`) para permitir que las pruebas unitarias instrumenten clases en Java 25 sin conflictos de bytecode.
+3. **Inyección por Constructor**: Remoción gradual de la inyección por campo (`@Autowired`) a favor de inyección basada en constructor para promover la inmutabilidad y pruebas más sencillas.
 
 ## 🏗️ Ejecución
 
-Para construir y ejecutar tests en todo el ecosistema:
+Para construir y ejecutar tests en todo el ecosistema usando el wrapper de Maven:
 
 ```bash
-mvn clean install
+./mvnw clean test
 ```
 
-Para ejecutar un módulo específico:
+Para instalar y empaquetar todos los submódulos:
 
 ```bash
-mvn spring-boot:run -pl :nombre-del-modulo
+./mvnw clean install -DskipTests
 ```
 
 ---
-*Desarrollado y mantenido bajo estándares modernos de ingeniería de software.*
+*Desarrollado y mantenido bajo estándares modernos de ingeniería de software con soporte nativo para Hilos Virtuales y código inmutable.*
