@@ -1,4 +1,7 @@
-spring:
+﻿spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: SpringBoot-jasypt-datasource
   # -------------------------------- H2 Settings -------------------------------- #
@@ -71,3 +74,5 @@ jasypt:
 #jasypt.encryptor.password=password
 #java -cp .m2/repository/org/jasypt/jasypt/1.9.3/jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="Topsecret@123" password=password algorithm=PBEWithMD5AndDES
 #java -cp .m2/repository/org/jasypt/jasypt/1.9.3/jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="xnEtUEQpYI2OT+SkCvov0yO8ZaZrVIYi" password=password algorithm=PBEWithMD5AndDES
+
+

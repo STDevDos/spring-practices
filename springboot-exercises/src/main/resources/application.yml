@@ -1,10 +1,13 @@
-server:
+﻿server:
   error:
     path: /error
     whitelabel:
       enabled: false
   port: 8080
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: Spring Web Exercise
   servlet:
@@ -54,3 +57,5 @@ postgresql:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         #ddl-auto: none
         ddl-auto: create
+
+

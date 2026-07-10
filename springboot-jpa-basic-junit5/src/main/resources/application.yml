@@ -1,4 +1,7 @@
-spring:
+﻿spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: springBoot-jpa-basic-junit5
   jpa:
@@ -15,4 +18,6 @@ mysql:
     minIdle: 1
     maxPoolSize: 5
     poolName: SpringBootHikariPostgres
+
+
 

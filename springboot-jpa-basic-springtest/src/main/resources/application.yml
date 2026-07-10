@@ -1,7 +1,10 @@
-server:
+﻿server:
   port: 8080
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: springboot-jpa-basic-springtest
   jpa:
@@ -19,3 +22,5 @@ mysql:
     minIdle: 1
     maxPoolSize: 5
     poolName: SpringBootHikariPostgres
+
+

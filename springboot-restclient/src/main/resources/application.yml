@@ -1,4 +1,9 @@
-# https://www.baeldung.com/spring-boot-no-web-server?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Baeldung+%28baeldung%29
+﻿# https://www.baeldung.com/spring-boot-no-web-server?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Baeldung+%28baeldung%29
 spring:
+  threads:
+    virtual:
+      enabled: true
   main:
     web-application-type: none
+
+

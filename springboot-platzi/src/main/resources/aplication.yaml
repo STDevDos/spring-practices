@@ -1,4 +1,7 @@
-spring:
+﻿spring:
+  threads:
+    virtual:
+      enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -9,3 +12,5 @@ spring:
       ddl-auto: create-drop #Automaticamente se creará las tablas en la BD desde los @Entity
       generate-ddl: true #no para prod
     show-sql: true #no para prod
+
+

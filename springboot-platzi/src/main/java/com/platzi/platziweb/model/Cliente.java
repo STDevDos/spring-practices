@@ -2,7 +2,6 @@ package com.platzi.platziweb.model;
 
 import com.platzi.platziweb.common.codevalue.Category;
 import com.platzi.platziweb.common.codevalue.Gender;
-import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -17,8 +16,7 @@ import java.util.Set;
 public class Cliente {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String nombre;

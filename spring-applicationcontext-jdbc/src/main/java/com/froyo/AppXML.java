@@ -15,7 +15,7 @@ public class AppXML {
         log.info("Iniciando AppXML");
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        AnimalsService animalsService = (AnimalsService) context.getBean("animalsServiceImpl");
+        AnimalsService animalsService = context.getBean("animalsServiceImpl", AnimalsService.class);
 
         animalsService.findAll().forEach(animal -> System.out.println(animal.getName()));
 
