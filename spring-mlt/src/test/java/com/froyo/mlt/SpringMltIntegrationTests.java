@@ -37,40 +37,30 @@ public class SpringMltIntegrationTests {
     @LocalServerPort
     private int port;
 
-    private final TestRestTemplate restTemplate;
-    private final Environment environment;
-    private final com.froyo.mlt.service.PaymentService paymentService;
-    private final com.froyo.mlt.service.TokenBlacklistService tokenBlacklistService;
-    private final ProductService productService;
-    private final OrderRepository orderRepository;
-    private final StockMarketService stockMarketService;
-    private final EntityManager entityManager;
-
-    /**
-     * Constructor Injection is the preferred method for Dependency Injection in
-     * Spring.
-     * Since Spring 4.3, @Autowired is optional if there's only one constructor.
-     * In Tests, we explicitly add @Autowired so JUnit 5/Spring knows how to inject
-     * these beans.
-     */
     @Autowired
-    public SpringMltIntegrationTests(TestRestTemplate restTemplate,
-            Environment environment,
-            ProductService productService,
-            OrderRepository orderRepository,
-            StockMarketService stockMarketService,
-            EntityManager entityManager,
-            com.froyo.mlt.service.PaymentService paymentService,
-            com.froyo.mlt.service.TokenBlacklistService tokenBlacklistService) {
-        this.restTemplate = restTemplate;
-        this.environment = environment;
-        this.productService = productService;
-        this.orderRepository = orderRepository;
-        this.stockMarketService = stockMarketService;
-        this.entityManager = entityManager;
-        this.paymentService = paymentService;
-        this.tokenBlacklistService = tokenBlacklistService;
-    }
+    private TestRestTemplate restTemplate;
+    
+    @Autowired
+    private Environment environment;
+    
+    @Autowired
+    private com.froyo.mlt.service.PaymentService paymentService;
+    
+    @Autowired
+    private com.froyo.mlt.service.TokenBlacklistService tokenBlacklistService;
+    
+    @Autowired
+    private ProductService productService;
+    
+    @Autowired
+    private OrderRepository orderRepository;
+    
+    @Autowired
+    private StockMarketService stockMarketService;
+    
+    @Autowired
+    private EntityManager entityManager;
+
 
     @Test
     void testScenario1_Profiles() {
